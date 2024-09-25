@@ -1,5 +1,5 @@
 ---
-title: 'Your Title Here'
+title: 'Analysis of SARS-CoV-2 SNP Data
 author: "Kim Medina"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
