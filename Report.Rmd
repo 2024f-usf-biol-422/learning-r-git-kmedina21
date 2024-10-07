@@ -1,5 +1,5 @@
 ---
-title: 'Analysis of SARS-CoV-2 SNP Data
+title: 'Analysis of SARS-CoV-2 SNP Data'
 author: "Kim Medina"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
@@ -14,11 +14,78 @@ knitr::opts_chunk$set(echo = FALSE,
                       error = FALSE)
 ```
 
-# Background
-
-This is a report on SARS-CoV-2, including some variant analysis.
-
-```{r sample-chunk}
-# this is an example code chunk
-print("Hello World")
+## Setup
+```{r, assignment-of-SNP-dataset-and-sample-ID-to-variable}
+snp_data <- read.csv("data/sample_snp_data.csv")
+sample_id <- "sample_id"
 ```
+
+```{r, load-packages-and-source-function-file}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+source("code/functions/functions.R")
+```
+
+## Project Description
+
+This project analyzes single nucleotide polymorphism (SNP) data from SARS-CoV-2 samples. It subsets the data to focus solely on one sample only. The SNP data is then visualized in a plot. The first package used is dplyr [@dplyr]. Then ggplot2 is used to create the plot [@ggplot2]. Lastly, knitr is used to create the report [@knitr].
+
+## Subsetting data
+
+```{r, writing-csv-file}
+single_sample_data <- subset_snp_data(snp_data, "SRR12433063")
+output <- ("output/sample_snp_data_SRR12433063.csv")
+write.csv(single_sample_data, file = output, row.names = FALSE)
+kable(single_sample_data, caption = "SNP data for sample SRR12433063")
+```
+
+```{r, writing-csv-file-2}
+single_sample_data2 <- subset_snp_data(snp_data, "SRR12433065")
+output <- ("output/sample_snp_data_SRR12433065.csv")
+write.csv(single_sample_data, file = output, row.names = FALSE)
+kable(single_sample_data2, caption = "SNP data for sample SRR12433065")
+```
+
+```{r, writing-csv-file-3}
+single_sample_data3 <- subset_snp_data(snp_data, "SRR12433066")
+output <- ("output/sample_snp_data_SRR12433066.csv")
+write.csv(single_sample_data, file = output, row.names = FALSE)
+kable(single_sample_data3, caption = "SNP data for sample SRR12433066")
+```
+
+## Figures
+
+```{r, plot-quality-across-genome}
+snp_data %>%
+  ggplot(aes(x = pos,
+             y = qual,
+             color = sample)) + 
+  geom_point(size = 3) +
+  labs(title = "SNP quality across SARS-CoV-2 Genome",
+       x = "Position in Genome (nt)",
+       y = "SNP Quality")
+
+ggsave("output/plot_quality_across_genome.png")
+```
+
+```{r, plot-quality-across-genome-SRR12433063}
+snp_data %>%
+  subset_snp_data("SRR12433063") %>%
+  ggplot(aes(x = pos,
+             y = qual,
+             color = sample)) +
+  geom_point(size = 3) +
+  labs(title = "SNP quality of sample SRR12433063 across SARS-CoV-2 Genome",
+       x = "Position in Genome (nt)",
+       y = "SNP Quality")
+
+ggsave("output/plot_quality_across_genome_SRR12433063.png")
+```
+
+### Session Info
+```{r, session-info}
+devtools::session_info()
+```
+
+# Sources Cited
