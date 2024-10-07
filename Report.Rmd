@@ -60,7 +60,7 @@ kable(single_sample_data3, caption = "SNP data for sample SRR12433066")
 snp_data %>%
   ggplot(aes(x = pos,
              y = qual,
-             color = sample)) + 
+             color = sample)) +
   geom_point(size = 3) +
   labs(title = "SNP quality across SARS-CoV-2 Genome",
        x = "Position in Genome (nt)",
