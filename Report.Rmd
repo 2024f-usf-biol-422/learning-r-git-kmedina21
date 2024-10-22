@@ -37,7 +37,8 @@ This project analyzes single nucleotide polymorphism (SNP) data from SARS-CoV-2 
 
 ```{r, writing-csv-file}
 single_sample_data <- subset_snp_data(snp_data, sample_id63)
-output <- (paste("output/sample_snp_data_", sample_id63, ".csv"))
+sample_id_clean <- gsub(" ", "", sample_id63)
+output <- paste("output/sample_snp_data_", sample_id_clean, ".csv", sep = "")
 write.csv(single_sample_data, file = output, row.names = FALSE)
 kable(single_sample_data, caption = paste0("SNP data for sample ", sample_id63))
 ```
@@ -55,7 +56,6 @@ snp_data %>%
                       sample_id63, " across SARS-CoV-2 Genome"),
        x = "Position in Genome (nt)",
        y = "SNP Quality")
-
 ggsave(paste0("output/plot_quality_across_genome_", sample_id63, ".png"))
 ```
 
