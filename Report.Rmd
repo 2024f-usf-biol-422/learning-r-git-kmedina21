@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE,
 ## Setup
 ```{r, assignment-of-SNP-dataset-and-sample-ID-to-variable}
 snp_data <- read.csv("data/sample_snp_data.csv")
-sample_id <- "sample_id"
+sample_id <- "sample ID"
 ```
 
 ```{r, load-packages-and-source-function-file}
