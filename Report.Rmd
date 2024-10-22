@@ -34,24 +34,13 @@ This project analyzes single nucleotide polymorphism (SNP) data from SARS-CoV-2 
 ## Subsetting data
 
 ```{r, writing-csv-file}
-single_sample_data <- subset_snp_data(snp_data, "SRR12433063")
-output <- ("output/sample_snp_data_SRR12433063.csv")
+sample_id63 <- "SRR12433063"
+sample_id65 <- "SRR12433065"
+sample_id66 <- "SRR12433066"
+single_sample_data <- subset_snp_data(snp_data, sample_id63)
+output <- ("output/sample_snp_data_subset.csv")
 write.csv(single_sample_data, file = output, row.names = FALSE)
-kable(single_sample_data, caption = "SNP data for sample SRR12433063")
-```
-
-```{r, writing-csv-file-2}
-single_sample_data2 <- subset_snp_data(snp_data, "SRR12433065")
-output <- ("output/sample_snp_data_SRR12433065.csv")
-write.csv(single_sample_data, file = output, row.names = FALSE)
-kable(single_sample_data2, caption = "SNP data for sample SRR12433065")
-```
-
-```{r, writing-csv-file-3}
-single_sample_data3 <- subset_snp_data(snp_data, "SRR12433066")
-output <- ("output/sample_snp_data_SRR12433066.csv")
-write.csv(single_sample_data, file = output, row.names = FALSE)
-kable(single_sample_data3, caption = "SNP data for sample SRR12433066")
+kable(single_sample_data, caption = paste0("SNP data for sample ", sample_id63))
 ```
 
 ## Figures
