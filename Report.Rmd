@@ -51,10 +51,10 @@ snp_data %>%
              y = qual,
              color = sample)) +
   geom_point(size = 3) +
-  labs(title = paste0(
-    "SNP quality of sample ", sample_id63, " across SARS-CoV-2 Genome"),
-    x = "Position in Genome (nt)",
-    y = "SNP Quality")
+  labs(title = paste0("SNP quality of sample ", 
+                      sample_id63, " across SARS-CoV-2 Genome"),
+       x = "Position in Genome (nt)",
+       y = "SNP Quality")
 
 ggsave(paste0("output/plot_quality_across_genome_", sample_id63, ".png"))
 ```
