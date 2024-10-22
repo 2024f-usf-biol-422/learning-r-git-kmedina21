@@ -24,7 +24,7 @@ sample_id <- "sample ID"
 library(dplyr)
 library(ggplot2)
 library(knitr)
-source("code/functions/functions.R")
+source("code/functions/subset_data_function.R")
 ```
 
 ## Project Description
