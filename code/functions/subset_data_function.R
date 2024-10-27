@@ -7,7 +7,7 @@ library(knitr)
 subset_snp_data <- function(dataset, sample_id) {
 
   # Read the CSV file into a data frame
-  snp_data <- read.csv("data/sample_snp_data.csv")
+  snp_data <- dataset
 
   # Subset the data to include only the specified sample
   subset_data <- snp_data[snp_data$sample == sample_id, ]
