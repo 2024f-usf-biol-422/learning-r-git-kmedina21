@@ -16,8 +16,8 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ## Setup
 ```{r, assignment-of-SNP-dataset-and-sample-ID-to-variable}
-snp_data <- "data/sample_snp_data.csv"
-sample_id <- "sample ID"
+snp_data <- read.csv("data/sample_snp_data.csv")
+sample_id <- "SRR12433063"
 ```
 
 ```{r, load-packages-and-source-function-file}
@@ -35,8 +35,7 @@ This project analyzes single nucleotide polymorphism (SNP) data from SARS-CoV-2 
 
 ```{r, writing-csv-file}
 single_sample_data <- subset_snp_data(snp_data, sample_id)
-sample_id_clean <- gsub(" ", "", sample_id)
-output <- paste("output/sample_snp_data_", sample_id_clean, ".csv", sep = "")
+output <- paste("output/sample_snp_data_", sample_id, ".csv", sep = "")
 write.csv(single_sample_data, file = output, row.names = FALSE)
 kable(single_sample_data, caption = paste0("SNP data for sample ", sample_id))
 ```
