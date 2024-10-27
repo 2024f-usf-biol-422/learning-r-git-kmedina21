@@ -56,6 +56,21 @@ snp_data %>%
 ggsave(paste0("output/plot_quality_across_genome_", sample_id, ".png"))
 ```
 
+```{r, plot-alt-across-genome-subset}
+snp_data %>%
+  subset_snp_data(sample_id) %>%
+  ggplot(aes(x = pos,
+             y = alt,
+             color = sample)) +
+  geom_point(size = 3) +
+  labs(title = paste0("Alt SNP of sample ",
+                      sample_id, " across SARS-CoV-2 Genome"),
+       x = "Position in Genome (nt)",
+       y = "Alternative SNP")
+ggsave(paste0("output/plot_alt_snp_across_genome_", sample_id, ".png"))
+```
+
+
 ### Session Info
 ```{r, session-info}
 devtools::session_info()
