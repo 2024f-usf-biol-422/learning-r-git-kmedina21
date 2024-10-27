@@ -1,8 +1,3 @@
-# Load packages
-library(dplyr)
-library(ggplot2)
-library(knitr)
-
 # First function
 subset_snp_data <- function(dataset, sample_id) {
 
