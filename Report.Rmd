@@ -7,7 +7,7 @@ csl: bioinformatics.csl
 bibliography: references.bib
 params:
   input_file: "data/sample_snp_data.csv"
-  sample_id: "default_sample"       
+  sample_id: "SRR12433063"       
 ---
 
 ```{r setup, include = FALSE}
