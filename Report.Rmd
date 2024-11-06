@@ -17,9 +17,15 @@ knitr::opts_chunk$set(echo = FALSE,
                       error = FALSE)
 ```
 
+```{r, set-params}
+input_file <- params$input_file
+sample_id <- params$sample_id
+```
+
+
 ## Setup
 ```{r, assignment-of-SNP-dataset-and-sample-ID-to-variable}
-snp_data <- read.csv("data/sample_snp_data.csv")
+snp_data <- params$input_file
 sample_id <- "SRR12433063"
 ```
 
