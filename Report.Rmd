@@ -17,13 +17,9 @@ knitr::opts_chunk$set(echo = FALSE,
                       error = FALSE)
 ```
 
-```{r, set-params}
-input_file <- params$input_file
-sample_id <- params$sample_id
-```
-
 
 ## Setup
+
 ```{r, assignment-of-SNP-dataset-and-sample-ID-to-variable}
 snp_data <- params$input_file
 sample_id <- params$sample_id
@@ -46,17 +42,14 @@ This project analyzes single nucleotide polymorphism (SNP) data from SARS-CoV-2 
 single_sample_data <- subset_snp_data(snp_data, sample_id)
 output <- paste("output/sample_snp_data_", sample_id, ".csv", sep = "")
 write.csv(single_sample_data, file = output, row.names = FALSE)
-kable(single_sample_data, caption = paste0("SNP data for sample ", sample_id))
 ```
 
 ## Figure
 
 ```{r, plot-quality-across-genome-subset}
-snp_data %>%
-  subset_snp_data(sample_id) %>%
+single_sample_data %>%
   ggplot(aes(x = pos,
-             y = qual,
-             color = sample)) +
+             y = qual)) +
   geom_point(size = 3) +
   labs(title = paste0("SNP quality of sample ",
                       sample_id, " across SARS-CoV-2 Genome"),
@@ -66,11 +59,9 @@ ggsave(paste0("output/plot_quality_across_genome_", sample_id, ".png"))
 ```
 
 ```{r, plot-alt-across-genome-subset}
-snp_data %>%
-  subset_snp_data(sample_id) %>%
+single_sample_data %>%
   ggplot(aes(x = pos,
-             y = alt,
-             color = sample)) +
+             y = alt)) +
   geom_point(size = 3) +
   labs(title = paste0("Alt SNP of sample ",
                       sample_id, " across SARS-CoV-2 Genome"),
