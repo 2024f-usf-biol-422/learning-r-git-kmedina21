@@ -1,10 +1,13 @@
 ---
-title: 'Your Title Here'
-author: "Don Francisco"
+title: 'Analysis of SARS-CoV-2 SNP Data'
+author: "Kim Medina"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 csl: bioinformatics.csl
 bibliography: references.bib
+params:
+  input_file: "data/sample_snp_data.csv"
+  sample_id: "SRR12433063"       
 ---
 
 ```{r setup, include = FALSE}
@@ -14,11 +17,63 @@ knitr::opts_chunk$set(echo = FALSE,
                       error = FALSE)
 ```
 
-# Background
 
-This is a report on SARS-CoV-2, including some variant analysis.
+## Setup
 
-```{r sample-chunk}
-# this is an example code chunk
-print("Hello World")
+```{r, assignment-of-SNP-dataset-and-sample-ID-to-variable}
+snp_data <- params$input_file
+sample_id <- params$sample_id
 ```
+
+```{r, load-packages-and-source-function-file}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+source("code/functions/subset_data_function.R")
+```
+
+## Project Description
+
+This project analyzes single nucleotide polymorphism (SNP) data from SARS-CoV-2 samples. It subsets the data to focus solely on one sample only. The SNP data is then visualized in a plot. The first package used is dplyr [@dplyr]. Then ggplot2 is used to create the plot [@ggplot2]. Lastly, knitr is used to create the report [@knitr].
+
+## Subsetting data
+
+```{r, writing-csv-file}
+single_sample_data <- subset_snp_data(snp_data, sample_id)
+output <- paste("output/sample_snp_data_", sample_id, ".csv", sep = "")
+write.csv(single_sample_data, file = output, row.names = FALSE)
+```
+
+## Figure
+
+```{r, plot-quality-across-genome-subset}
+single_sample_data %>%
+  ggplot(aes(x = pos,
+             y = qual)) +
+  geom_point(size = 3) +
+  labs(title = paste0("SNP quality of sample ",
+                      sample_id, " across SARS-CoV-2 Genome"),
+       x = "Position in Genome (nt)",
+       y = "SNP Quality")
+ggsave(paste0("output/plot_quality_across_genome_", sample_id, ".png"))
+```
+
+```{r, plot-alt-across-genome-subset}
+single_sample_data %>%
+  ggplot(aes(x = pos,
+             y = alt)) +
+  geom_point(size = 3) +
+  labs(title = paste0("Alt SNP of sample ",
+                      sample_id, " across SARS-CoV-2 Genome"),
+       x = "Position in Genome (nt)",
+       y = "Alternative SNP")
+ggsave(paste0("output/plot_alt_snp_across_genome_", sample_id, ".png"))
+```
+
+
+### Session Info
+```{r, session-info}
+devtools::session_info()
+```
+
+# Sources Cited
