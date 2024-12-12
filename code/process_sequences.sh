@@ -1,5 +1,4 @@
 #!/bin/bash
-<<<<<<< HEAD
 set -eou pipefail
 
 # Kim Medina
