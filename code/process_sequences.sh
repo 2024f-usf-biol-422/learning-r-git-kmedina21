@@ -1,4 +1,12 @@
 #!/bin/bash
+set -eou pipefail
+
+# Kim Medina
+# ctmedina2@dons.usfca.edu
+# December 12, 2024
+# Purpose of the script is to parse the file and tally the amount of sequences
+# as well as sort the countries from largest to smallest
+
 
 count=$(zgrep -c "^>" /blast-db/sars-cov-2-seq-data/2022-10-17_ncbi_sars-cov-2-sequences.fasta.gz)
 echo "The amount of sequences in this file is: $count" > ../output/parse_result.txt
